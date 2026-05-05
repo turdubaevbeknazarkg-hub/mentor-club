@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News — MentorBridge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html">Mentors</a></li>
+    <li><a href="mentees.html">Mentees</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="membership.html">Join Us</a></li>
+    <li><a href="news.html" class="active">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <h1 style="font-size:2.2rem;">Club <span>News</span></h1>
+    <p>Updates, announcements, and stories from the MentorBridge community.</p>
+  </section>
+
+  <div class="section">
+    <h2 class="section-title">Latest Updates</h2>
+    <div class="divider"></div>
+
+    <div class="cards-grid">
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #0f3460, #16213e);">🎓</div>
+        <div class="news-body">
+          <div class="date">April 28, 2026</div>
+          <h3>Spring 2026 Cohort — 15 New Pairs Matched!</h3>
+          <p>We officially matched 15 mentor-mentee pairs this semester, our biggest cohort yet. Applications took under a week to process thanks to our new matching system.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #7b2d8b, #4a1060);">🏆</div>
+        <div class="news-body">
+          <div class="date">April 15, 2026</div>
+          <h3>MentorBridge Wins Best New Student Org Award</h3>
+          <p>The university's Student Life department recognized MentorBridge as the Best New Student Organization of the year at the annual campus awards ceremony.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #1a6b3c, #0d4a28);">🏃</div>
+        <div class="news-body">
+          <div class="date">April 3, 2026</div>
+          <h3>Fitness Challenge Recap — 30 Members Completed It</h3>
+          <p>Our 21-day fitness challenge wrapped up with 30 members completing the full program. Participants logged over 400 combined hours of physical activity.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #b45309, #78350f);">🎤</div>
+        <div class="news-body">
+          <div class="date">March 20, 2026</div>
+          <h3>Leadership Workshop with Alumni Panel</h3>
+          <p>Five alumni returned to campus to speak about leadership, failure, and what they wish they'd known as students. Over 80 attendees packed the event hall.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #0f3460, #e2b04a);">📋</div>
+        <div class="news-body">
+          <div class="date">March 5, 2026</div>
+          <h3>Summer 2026 Applications Now Open</h3>
+          <p>We're accepting mentor and mentee applications for the Summer 2026 cohort. Spots are limited to 40 pairs. Apply early via the Membership page.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-banner" style="background: linear-gradient(135deg, #1e3a5f, #2d6a9f);">🌍</div>
+        <div class="news-body">
+          <div class="date">February 18, 2026</div>
+          <h3>MentorBridge Featured in University Newsletter</h3>
+          <p>The university's official student newsletter ran a full feature on our club's holistic approach to mentorship, highlighting three mentee success stories.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="events.html">Events</a> &nbsp;|&nbsp; <a href="membership.html">Join</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>

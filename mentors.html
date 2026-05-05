@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentors — MentorBridge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html" class="active">Mentors</a></li>
+    <li><a href="mentees.html">Mentees</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="membership.html">Join Us</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <h1 style="font-size:2.2rem;">Meet Our <span>Mentors</span></h1>
+    <p>Every mentor volunteered because they care. They've been in your shoes — and they want to help you go further.</p>
+  </section>
+
+  <div class="section">
+    <h2 class="section-title">Active Mentors</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">Each mentor is matched based on your goals and personality, not just your major.</p>
+
+    <div class="cards-grid">
+
+      <div class="person-card">
+        <div class="avatar">A</div>
+        <h3>Azamat Salamatov</h3>
+        <div class="role">Computer Science — Senior</div>
+        <p>Helps mentees with coding projects, internship prep, and building discipline through structured daily routines.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Academic</span>
+          <span class="tag">Professional</span>
+          <span class="tag">Discipline</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar">S</div>
+        <h3>Sara Yilmaz</h3>
+        <div class="role">Interdisciplinary Studies in Education — Graduate Student</div>
+        <p>Focuses on mental wellness, healthy relationships, and helping mentees navigate stress and social challenges.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Relationships</span>
+          <span class="tag">Mental Health</span>
+          <span class="tag">Spiritual</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar">K</div>
+        <h3>Nurzhigit Esenaliev</h3>
+        <div class="role">Business Administration — Junior</div>
+        <p>Guides mentees in career planning, networking, and staying physically active with consistent fitness habits.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Professional</span>
+          <span class="tag">Fitness</span>
+          <span class="tag">Goals</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar">L</div>
+        <h3>Lena Park</h3>
+        <div class="role">Computer Science — Senior</div>
+        <p>Supports pre-med students with coursework, research skills, and finding balance between academics and personal life.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Academic</span>
+          <span class="tag">Research</span>
+          <span class="tag">Balance</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar">O</div>
+        <h3>Omar Farouk</h3>
+        <div class="role">Business Administration — Graduate Student</div>
+        <p>Helps with technical projects, time management, and spiritual grounding for students seeking purpose and direction.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Business</span>
+          <span class="tag">Spiritual</span>
+          <span class="tag">Time Mgmt</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar">M</div>
+        <h3>Perizat Asan</h3>
+        <div class="role">Communications — Junior</div>
+        <p>Coaches mentees on public speaking, building confidence, and developing strong personal and professional relationships.</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Communication</span>
+          <span class="tag">Confidence</span>
+          <span class="tag">Leadership</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="highlight-band">
+    <h2>Want to Become a Mentor?</h2>
+    <p>You don't need to be perfect — you just need to care. Apply and help someone else level up.</p>
+    <a href="membership.html#mentor" class="btn btn-primary">Apply as Mentor</a>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="news.html">News</a> &nbsp;|&nbsp; <a href="membership.html">Join</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>

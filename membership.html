@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Us — MentorBridge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html">Mentors</a></li>
+    <li><a href="mentees.html">Mentees</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="membership.html" class="active">Join Us</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <h1 style="font-size:2.2rem;">Join <span>MentorBridge</span></h1>
+    <p>Two paths. One community. Choose your role below and apply today — it's free and takes 5 minutes.</p>
+  </section>
+
+  <!-- MENTOR vs MENTEE BOXES -->
+  <div class="section">
+    <h2 class="section-title">Choose Your Path</h2>
+    <div class="divider"></div>
+
+    <div class="membership-grid">
+
+      <div class="membership-box mentor" id="mentor">
+        <h2>🧭 Become a Mentor</h2>
+        <p>Mentors are experienced students or graduates who volunteer their time to guide others. You'll gain leadership skills, build your resume, and make a real difference.</p>
+        <ul>
+          <li>Must be a sophomore, junior, senior, or grad student</li>
+          <li>Minimum 3.0 GPA recommended</li>
+          <li>Commit to 2–3 hours per week</li>
+          <li>Attend at least 2 club events per semester</li>
+          <li>Complete a short mentor training session</li>
+        </ul>
+        <a href="#apply-mentor" class="btn btn-primary">Apply as Mentor ↓</a>
+      </div>
+
+      <div class="membership-box mentee" id="mentee">
+        <h2>🌱 Become a Mentee</h2>
+        <p>Mentees are students who want to grow — in any area of life. No prior experience needed. Just a genuine desire to improve and show up consistently.</p>
+        <ul>
+          <li>Open to all years and majors</li>
+          <li>No GPA requirement</li>
+          <li>Be willing to meet weekly with your mentor</li>
+          <li>Set at least one personal growth goal</li>
+          <li>Participate in at least one club event</li>
+        </ul>
+        <a href="#apply-mentee" class="btn btn-primary">Apply as Mentee ↓</a>
+      </div>
+
+    </div>
+
+    <!-- WHAT TO EXPECT -->
+    <h2 class="section-title">What Happens After You Apply</h2>
+    <div class="divider"></div>
+    <div class="cards-grid" style="margin-bottom: 60px;">
+      <div class="card"><div class="card-icon">📝</div><h3>1. Submit Your Form</h3><p>Fill out the application below. It takes about 5 minutes. Tell us your goals and what areas you want to grow in.</p></div>
+      <div class="card"><div class="card-icon">📞</div><h3>2. Short Interview</h3><p>A club officer will reach out within 3–5 days for a quick 15-minute chat to learn more about you.</p></div>
+      <div class="card"><div class="card-icon">🤝</div><h3>3. Get Matched</h3><p>We carefully pair you based on your goals, personality, schedule, and areas of interest — not just your major.</p></div>
+      <div class="card"><div class="card-icon">🚀</div><h3>4. Start Growing</h3><p>Your first meeting happens within one week of matching. From there, you set the pace together.</p></div>
+    </div>
+
+  </div>
+
+  <!-- MENTOR APPLICATION FORM -->
+  <div class="bg-gray" style="padding: 60px 20px;" id="apply-mentor">
+    <div class="form-section">
+      <h2>🧭 Mentor Application</h2>
+      <p style="color:#666; margin-bottom:28px; font-size:0.95rem;">All fields are required. Applications reviewed within 5 business days.</p>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label>University Email</label>
+        <input type="email" placeholder="you@university.edu">
+      </div>
+      <div class="form-group">
+        <label>Major</label>
+        <input type="text" placeholder="e.g. Computer Science">
+      </div>
+      <div class="form-group">
+        <label>Year of Study</label>
+        <select>
+          <option value="">Select your year</option>
+          <option>Sophomore</option>
+          <option>Junior</option>
+          <option>Senior</option>
+          <option>Graduate Student</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Areas You Can Mentor In</label>
+        <select>
+          <option value="">Select primary area</option>
+          <option>Academic / Coursework</option>
+          <option>Career & Professional</option>
+          <option>Health & Fitness</option>
+          <option>Relationships & Social Skills</option>
+          <option>Spiritual & Personal Purpose</option>
+          <option>Discipline & Goal Setting</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Why do you want to be a mentor?</label>
+        <textarea placeholder="Tell us in 2–4 sentences what motivates you to guide others..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Weekly availability (hours)</label>
+        <select>
+          <option value="">Select availability</option>
+          <option>2–3 hours/week</option>
+          <option>3–5 hours/week</option>
+          <option>5+ hours/week</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" style="width:100%; margin-top:8px;" onclick="alert('Thank you for applying as a mentor! We will contact you within 5 business days.')">Submit Mentor Application</button>
+    </div>
+  </div>
+
+  <!-- MENTEE APPLICATION FORM -->
+  <div style="padding: 60px 20px;" id="apply-mentee">
+    <div class="form-section">
+      <h2>🌱 Mentee Application</h2>
+      <p style="color:#666; margin-bottom:28px; font-size:0.95rem;">Open to all students regardless of year or GPA. Be honest — it helps us match you better.</p>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label>University Email</label>
+        <input type="email" placeholder="you@university.edu">
+      </div>
+      <div class="form-group">
+        <label>Major</label>
+        <input type="text" placeholder="e.g. Nursing">
+      </div>
+      <div class="form-group">
+        <label>Year of Study</label>
+        <select>
+          <option value="">Select your year</option>
+          <option>Freshman</option>
+          <option>Sophomore</option>
+          <option>Junior</option>
+          <option>Senior</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Main area you want help in</label>
+        <select>
+          <option value="">Select an area</option>
+          <option>Academic / Coursework</option>
+          <option>Career & Professional</option>
+          <option>Health & Fitness</option>
+          <option>Relationships & Social Skills</option>
+          <option>Spiritual & Personal Purpose</option>
+          <option>Discipline & Goal Setting</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>What is one specific goal you want to achieve this semester?</label>
+        <textarea placeholder="Be specific — e.g. 'Improve my GPA from 2.6 to 3.2' or 'Build a consistent workout routine'..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>What's been your biggest challenge at university so far?</label>
+        <textarea placeholder="This helps us match you with the right mentor..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%; margin-top:8px;" onclick="alert('Thank you for applying as a mentee! We will contact you within 5 business days.')">Submit Mentee Application</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="news.html">News</a> &nbsp;|&nbsp; <a href="events.html">Events</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>

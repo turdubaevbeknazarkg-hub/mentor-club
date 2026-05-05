@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — MentorBridge</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f3460; min-height: 100vh; }
+
+    /* LOGIN */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0a0f2e 100%);
+    }
+    .login-box {
+      background: white;
+      border-radius: 20px;
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .login-logo { font-size: 2.4rem; margin-bottom: 6px; }
+    .login-box h2 { color: #0f3460; font-size: 1.4rem; margin-bottom: 4px; }
+    .login-box .subtitle { color: #888; font-size: 0.88rem; margin-bottom: 32px; }
+    .login-field { text-align: left; margin-bottom: 18px; }
+    .login-field label { display: block; font-size: 0.88rem; font-weight: 600; color: #333; margin-bottom: 7px; }
+    .login-field input { width: 100%; padding: 13px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .login-field input:focus { border-color: #0f3460; }
+    .login-btn { width: 100%; padding: 14px; background: #e2b04a; color: #0f3460; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: transform 0.15s, box-shadow 0.15s; }
+    .login-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(226,176,74,0.4); }
+    .login-error { color: #dc2626; font-size: 0.88rem; margin-top: 12px; display: none; }
+    .login-hint { margin-top: 20px; padding: 12px; background: #f0f4ff; border-radius: 8px; font-size: 0.82rem; color: #555; }
+
+    /* ADMIN PANEL */
+    #adminPanel { display: none; min-height: 100vh; background: #f0f2f8; }
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { width: 240px; background: linear-gradient(180deg, #0f3460 0%, #0a0f2e 100%); flex-shrink: 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; }
+    .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-logo .logo-text { color: #e2b04a; font-size: 1.2rem; font-weight: 700; display: block; }
+    .sidebar-logo .logo-sub { color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 3px; display: block; }
+    .sidebar-nav { padding: 20px 12px; flex: 1; }
+    .nav-section-label { color: rgba(255,255,255,0.3); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 12px; margin: 16px 0 8px; }
+    .sidebar-link { display: flex; align-items: center; gap: 11px; padding: 11px 14px; border-radius: 9px; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.92rem; cursor: pointer; transition: background 0.15s, color 0.15s; border: none; background: none; width: 100%; text-align: left; margin-bottom: 2px; }
+    .sidebar-link:hover { background: rgba(255,255,255,0.08); color: white; }
+    .sidebar-link.active { background: #e2b04a; color: #0f3460; font-weight: 600; }
+    .sidebar-link .icon { font-size: 1.1rem; width: 20px; text-align: center; }
+    .sidebar-badge { margin-left: auto; background: #dc2626; color: white; font-size: 0.7rem; font-weight: 700; padding: 1px 7px; border-radius: 20px; }
+    .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .logout-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 9px; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 0.88rem; background: none; border: none; width: 100%; transition: color 0.15s; }
+    .logout-btn:hover { color: #e2b04a; }
+
+    /* MAIN */
+    .admin-main { flex: 1; overflow-y: auto; }
+    .admin-topbar { background: white; padding: 18px 36px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+    .topbar-title { font-size: 1.2rem; font-weight: 700; color: #0f3460; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .admin-badge { background: #e2b04a; color: #0f3460; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+    .admin-user { color: #555; font-size: 0.9rem; }
+
+    /* TABS */
+    .tab-view { display: none; padding: 36px; }
+    .tab-view.active { display: block; }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 36px; }
+    .stat-card { background: white; border-radius: 14px; padding: 24px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 18px; }
+    .stat-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .stat-icon.blue { background: #dbeafe; }
+    .stat-icon.gold { background: #fef3c7; }
+    .stat-icon.green { background: #d1fae5; }
+    .stat-icon.purple { background: #ede9fe; }
+    .stat-label { font-size: 0.82rem; color: #888; margin-bottom: 4px; }
+    .stat-num { font-size: 1.9rem; font-weight: 800; color: #0f3460; }
+
+    /* PANEL CARD */
+    .panel-card { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; margin-bottom: 32px; }
+    .panel-card-header { padding: 20px 28px; border-bottom: 1px solid #f0f2f8; display: flex; align-items: center; justify-content: space-between; }
+    .panel-card-header h3 { color: #0f3460; font-size: 1.05rem; font-weight: 700; }
+    .panel-card-header span { color: #888; font-size: 0.85rem; }
+
+    /* DATA TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .data-table thead { background: #f8f9ff; }
+    .data-table th { padding: 12px 20px; text-align: left; font-weight: 600; color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #eef1f8; }
+    .data-table td { padding: 14px 20px; border-bottom: 1px solid #f0f2f8; color: #333; vertical-align: top; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: #fafbff; }
+
+    /* BADGES */
+    .status { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .status.pending  { background: #fef3c7; color: #92400e; }
+    .status.active   { background: #d1fae5; color: #065f46; }
+    .status.matched  { background: #dbeafe; color: #1e40af; }
+    .status.new      { background: #ede9fe; color: #4c1d95; }
+    .role-badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .role-badge.mentor { background: #0f3460; color: white; }
+    .role-badge.mentee { background: #7b2d8b; color: white; }
+    .chip { display: inline-block; background: #eef2ff; color: #0f3460; font-size: 0.75rem; padding: 2px 9px; border-radius: 20px; margin: 2px 2px 2px 0; font-weight: 500; }
+
+    /* AVATAR */
+    .avatar-sm { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #0f3460, #e2b04a); display: inline-flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .name-cell { display: flex; align-items: center; gap: 12px; }
+    .name-cell .name { font-weight: 600; color: #0f3460; }
+    .name-cell .id   { font-size: 0.78rem; color: #aaa; }
+    .contact-link { color: #0f3460; text-decoration: none; font-size: 0.85rem; }
+    .contact-link:hover { text-decoration: underline; }
+
+    /* BUTTONS */
+    .action-btn { padding: 5px 14px; border-radius: 7px; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: opacity 0.15s; }
+    .action-btn:hover { opacity: 0.8; }
+    .action-btn.approve { background: #d1fae5; color: #065f46; }
+
+    /* SUBMISSION DETAIL */
+    .submission-detail { background: #f8f9ff; border-radius: 10px; padding: 14px 18px; margin-top: 8px; font-size: 0.88rem; color: #444; line-height: 1.7; border-left: 3px solid #e2b04a; }
+    .section-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: #aaa; margin-bottom: 16px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">🌱</div>
+    <h2>MentorBridge Admin</h2>
+    <p class="subtitle">North American University — Club Portal</p>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="admin username" autocomplete="off">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In to Admin Panel</button>
+    <p class="login-error" id="loginError">Incorrect username or password.</p>
+    <div class="login-hint">
+      <strong>Demo credentials:</strong><br>
+      Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>mentorbridge2026</code>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-text">🌱 MentorBridge</span>
+        <span class="logo-sub">Admin Dashboard — NAU</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <button class="sidebar-link active" onclick="showTab('dashboard', this)">
+          <span class="icon">📊</span> Dashboard
+        </button>
+        <div class="nav-section-label">Applications</div>
+        <button class="sidebar-link" onclick="showTab('submissions', this)">
+          <span class="icon">📋</span> Submissions
+          <span class="sidebar-badge">1</span>
+        </button>
+        <div class="nav-section-label">Members</div>
+        <button class="sidebar-link" onclick="showTab('mentors', this)">
+          <span class="icon">🧭</span> Mentors
+        </button>
+        <button class="sidebar-link" onclick="showTab('mentees', this)">
+          <span class="icon">🌱</span> Mentees
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="doLogout()">
+          <span>🚪</span> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-right">
+          <span class="admin-user">👤 admin</span>
+          <span class="admin-badge">Admin</span>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="tab-view active" id="tab-dashboard">
+        <div class="section-label">Overview — Spring 2026 · North American University</div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon blue">🧭</div>
+            <div><div class="stat-label">Total Mentors</div><div class="stat-num">6</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">🌱</div>
+            <div><div class="stat-label">Total Mentees</div><div class="stat-num">6</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold">🤝</div>
+            <div><div class="stat-label">Active Pairs</div><div class="stat-num">5</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">📋</div>
+            <div><div class="stat-label">New Submissions</div><div class="stat-num">1</div></div>
+          </div>
+        </div>
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <h3>📌 Recent Activity</h3>
+            <span>Last 7 days</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Date</th><th>Event</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>May 4, 2026</td><td>New mentee application received — Amir K.</td><td><span class="status new">New</span></td></tr>
+              <tr><td>May 2, 2026</td><td>Mentor–Mentee pair matched: Azamat S. ↔ James O.</td><td><span class="status matched">Matched</span></td></tr>
+              <tr><td>Apr 28, 2026</td><td>Spring 2026 cohort matching completed — 5 pairs</td><td><span class="status active">Done</span></td></tr>
+              <tr><td>Apr 15, 2026</td><td>MentorBridge won Best New Student Org Award</td><td><span class="status active">Award</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUBMISSIONS -->
+      <div class="tab-view" id="tab-submissions">
+        <div class="section-label">Pending Applications</div>
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <h3>📋 New Applications</h3>
+            <span>1 pending review</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>Role</th>
+                <th>University / Major</th>
+                <th>Year</th>
+                <th>Focus Area</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="name-cell">
+                    <div class="avatar-sm">A</div>
+                    <div>
+                      <div class="name">Amir Karimov</div>
+                      <div class="id">a.karimov@nau.edu</div>
+                    </div>
+                  </div>
+                  <div class="submission-detail" style="margin-top:10px; max-width:340px;">
+                    <strong>Goal:</strong> Improve GPA from 2.8 to 3.5 and land a summer internship.<br>
+                    <strong>Challenge:</strong> Works part-time, struggles to balance coursework and job.<br>
+                    <strong>Phone:</strong> (832) 555-0142
+                  </div>
+                </td>
+                <td><span class="role-badge mentee">Mentee</span></td>
+                <td>North American University<br><small style="color:#888;">Computer Science</small></td>
+                <td>Freshman</td>
+                <td><span class="chip">Academic</span><span class="chip">Career</span></td>
+                <td>May 4, 2026</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="action-btn approve" onclick="alert('Approved! Interview invite sent to a.karimov@nau.edu')">Approve</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <h3>Recently Processed</h3>
+            <span>Spring 2026 cohort</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Applicant</th><th>Role</th><th>Processed On</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="name-cell">
+                    <div class="avatar-sm">J</div>
+                    <div><div class="name">James O.</div><div class="id">j.okonkwo@nau.edu</div></div>
+                  </div>
+                </td>
+                <td><span class="role-badge mentee">Mentee</span></td>
+                <td>Apr 20, 2026</td>
+                <td><span class="status matched">Matched</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="name-cell">
+                    <div class="avatar-sm">R</div>
+                    <div><div class="name">Ravi S.</div><div class="id">r.sharma@nau.edu</div></div>
+                  </div>
+                </td>
+                <td><span class="role-badge mentee">Mentee</span></td>
+                <td>Apr 20, 2026</td>
+                <td><span class="status matched">Matched</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MENTORS -->
+      <div class="tab-view" id="tab-mentors">
+        <div class="section-label">Full Mentor Registry — Spring 2026</div>
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <h3>🧭 All Mentors</h3>
+            <span>6 active mentors</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th><th>Age</th><th>University</th><th>Major</th><th>Year</th>
+                  <th>Focus Areas</th><th>Top Skills</th><th>Mentee</th><th>Contact</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm">A</div>
+                      <div><div class="name">Azamat Salamatov</div><div class="id">MB-M001</div></div>
+                    </div>
+                  </td>
+                  <td>22</td><td>North American Univ.</td><td>Computer Science</td><td>Senior</td>
+                  <td><span class="chip">Academic</span><span class="chip">Professional</span><span class="chip">Discipline</span></td>
+                  <td><span class="chip">Python</span><span class="chip">Mentoring</span><span class="chip">Time Mgmt</span></td>
+                  <td>James O.</td>
+                  <td><a class="contact-link" href="mailto:a.salamatov@nau.edu">a.salamatov@nau.edu</a><br><small style="color:#aaa;">(832) 555-0101</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">S</div>
+                      <div><div class="name">Sara Yilmaz</div><div class="id">MB-M002</div></div>
+                    </div>
+                  </td>
+                  <td>24</td><td>North American Univ.</td><td>Interdisciplinary Studies in Education</td><td>Graduate</td>
+                  <td><span class="chip">Relationships</span><span class="chip">Mental Health</span><span class="chip">Spiritual</span></td>
+                  <td><span class="chip">Active Listening</span><span class="chip">Counseling</span><span class="chip">Empathy</span></td>
+                  <td>Fatima H.</td>
+                  <td><a class="contact-link" href="mailto:s.yilmaz@nau.edu">s.yilmaz@nau.edu</a><br><small style="color:#aaa;">(832) 555-0102</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#1a6b3c,#e2b04a);">N</div>
+                      <div><div class="name">Nurzhigit Esenaliev</div><div class="id">MB-M003</div></div>
+                    </div>
+                  </td>
+                  <td>21</td><td>North American Univ.</td><td>Business Administration</td><td>Junior</td>
+                  <td><span class="chip">Professional</span><span class="chip">Fitness</span><span class="chip">Goals</span></td>
+                  <td><span class="chip">Networking</span><span class="chip">Excel</span><span class="chip">Fitness Coaching</span></td>
+                  <td>Nour A.</td>
+                  <td><a class="contact-link" href="mailto:n.esenaliev@nau.edu">n.esenaliev@nau.edu</a><br><small style="color:#aaa;">(832) 555-0103</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#b45309,#0f3460);">L</div>
+                      <div><div class="name">Lena Park</div><div class="id">MB-M004</div></div>
+                    </div>
+                  </td>
+                  <td>22</td><td>North American Univ.</td><td>Computer Science</td><td>Senior</td>
+                  <td><span class="chip">Academic</span><span class="chip">Research</span><span class="chip">Balance</span></td>
+                  <td><span class="chip">Research Methods</span><span class="chip">Java</span><span class="chip">Study Planning</span></td>
+                  <td>Yuna K.</td>
+                  <td><a class="contact-link" href="mailto:l.park@nau.edu">l.park@nau.edu</a><br><small style="color:#aaa;">(832) 555-0104</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#0f3460,#7b2d8b);">O</div>
+                      <div><div class="name">Omar Farouk</div><div class="id">MB-M005</div></div>
+                    </div>
+                  </td>
+                  <td>25</td><td>North American Univ.</td><td>Business Administration</td><td>Graduate</td>
+                  <td><span class="chip">Business</span><span class="chip">Spiritual</span><span class="chip">Time Mgmt</span></td>
+                  <td><span class="chip">Finance</span><span class="chip">Leadership</span><span class="chip">Goal Setting</span></td>
+                  <td>Tariq M.</td>
+                  <td><a class="contact-link" href="mailto:o.farouk@nau.edu">o.farouk@nau.edu</a><br><small style="color:#aaa;">(832) 555-0105</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#1e3a5f,#e2b04a);">P</div>
+                      <div><div class="name">Perizat Asan</div><div class="id">MB-M006</div></div>
+                    </div>
+                  </td>
+                  <td>21</td><td>North American Univ.</td><td>Communications</td><td>Junior</td>
+                  <td><span class="chip">Communication</span><span class="chip">Confidence</span><span class="chip">Leadership</span></td>
+                  <td><span class="chip">Public Speaking</span><span class="chip">Social Media</span><span class="chip">Branding</span></td>
+                  <td>Ravi S.</td>
+                  <td><a class="contact-link" href="mailto:p.asan@nau.edu">p.asan@nau.edu</a><br><small style="color:#aaa;">(832) 555-0106</small></td>
+                  <td><span class="status active">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENTEES -->
+      <div class="tab-view" id="tab-mentees">
+        <div class="section-label">Full Mentee Registry — Spring 2026</div>
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <h3>🌱 All Mentees</h3>
+            <span>6 active mentees</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th><th>Age</th><th>University</th><th>Major</th><th>Year</th>
+                  <th>Focus Area</th><th>Semester Goal</th><th>Mentor</th><th>Contact</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">J</div>
+                      <div><div class="name">James Okonkwo</div><div class="id">MB-T001</div></div>
+                    </div>
+                  </td>
+                  <td>18</td><td>North American Univ.</td><td>Computer Science</td><td>Freshman</td>
+                  <td><span class="chip">Academic</span><span class="chip">Discipline</span></td>
+                  <td>Raise GPA from 2.4 to 3.5</td>
+                  <td>Azamat S.</td>
+                  <td><a class="contact-link" href="mailto:j.okonkwo@nau.edu">j.okonkwo@nau.edu</a><br><small style="color:#aaa;">(832) 555-0201</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">F</div>
+                      <div><div class="name">Fatima Hassan</div><div class="id">MB-T002</div></div>
+                    </div>
+                  </td>
+                  <td>19</td><td>North American Univ.</td><td>Education</td><td>Sophomore</td>
+                  <td><span class="chip">Wellness</span><span class="chip">Spiritual</span></td>
+                  <td>Build consistent mindfulness routine</td>
+                  <td>Sara Y.</td>
+                  <td><a class="contact-link" href="mailto:f.hassan@nau.edu">f.hassan@nau.edu</a><br><small style="color:#aaa;">(832) 555-0202</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">R</div>
+                      <div><div class="name">Ravi Sharma</div><div class="id">MB-T003</div></div>
+                    </div>
+                  </td>
+                  <td>20</td><td>North American Univ.</td><td>Business Administration</td><td>Junior</td>
+                  <td><span class="chip">Professional</span><span class="chip">Career</span></td>
+                  <td>Land first internship offer</td>
+                  <td>Perizat A.</td>
+                  <td><a class="contact-link" href="mailto:r.sharma@nau.edu">r.sharma@nau.edu</a><br><small style="color:#aaa;">(832) 555-0203</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">N</div>
+                      <div><div class="name">Nour Alawi</div><div class="id">MB-T004</div></div>
+                    </div>
+                  </td>
+                  <td>18</td><td>North American Univ.</td><td>Criminal Justice</td><td>Freshman</td>
+                  <td><span class="chip">Fitness</span><span class="chip">Habits</span></td>
+                  <td>Work out 4x per week consistently</td>
+                  <td>Nurzhigit E.</td>
+                  <td><a class="contact-link" href="mailto:n.alawi@nau.edu">n.alawi@nau.edu</a><br><small style="color:#aaa;">(832) 555-0204</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">T</div>
+                      <div><div class="name">Tariq Mohamed</div><div class="id">MB-T005</div></div>
+                    </div>
+                  </td>
+                  <td>19</td><td>North American Univ.</td><td>Engineering</td><td>Sophomore</td>
+                  <td><span class="chip">Purpose</span><span class="chip">Spiritual</span></td>
+                  <td>Define personal values and 5-year vision</td>
+                  <td>Omar F.</td>
+                  <td><a class="contact-link" href="mailto:t.mohamed@nau.edu">t.mohamed@nau.edu</a><br><small style="color:#aaa;">(832) 555-0205</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="name-cell">
+                      <div class="avatar-sm" style="background:linear-gradient(135deg,#7b2d8b,#e2b04a);">Y</div>
+                      <div><div class="name">Yuna Kim</div><div class="id">MB-T006</div></div>
+                    </div>
+                  </td>
+                  <td>20</td><td>North American Univ.</td><td>Business Administration</td><td>Junior</td>
+                  <td><span class="chip">Social</span><span class="chip">Confidence</span></td>
+                  <td>Join 2 clubs, apply to become a mentor</td>
+                  <td>Lena P.</td>
+                  <td><a class="contact-link" href="mailto:y.kim@nau.edu">y.kim@nau.edu</a><br><small style="color:#aaa;">(832) 555-0206</small></td>
+                  <td><span class="status matched">Matched</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function doLogin() {
+    const user = document.getElementById("loginUser").value.trim();
+    const pass = document.getElementById("loginPass").value;
+    const err  = document.getElementById("loginError");
+    if (user === "admin" && pass === "mentorbridge2026") {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("adminPanel").style.display  = "block";
+      err.style.display = "none";
+    } else {
+      err.style.display = "block";
+      document.getElementById("loginPass").value = "";
+    }
+  }
+
+  function doLogout() {
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("adminPanel").style.display  = "none";
+    document.getElementById("loginUser").value = "";
+    document.getElementById("loginPass").value = "";
+  }
+
+  function showTab(tabId, btn) {
+    document.querySelectorAll(".tab-view").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".sidebar-link").forEach(l => l.classList.remove("active"));
+    document.getElementById("tab-" + tabId).classList.add("active");
+    btn.classList.add("active");
+    const titles = { dashboard: "Dashboard", submissions: "Applications & Submissions", mentors: "Mentor Registry", mentees: "Mentee Registry" };
+    document.getElementById("topbarTitle").textContent = titles[tabId] || tabId;
+  }
+</script>
+</body>
+</html>

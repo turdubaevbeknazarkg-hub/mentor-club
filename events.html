@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — MentorBridge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html">Mentors</a></li>
+    <li><a href="mentees.html">Mentees</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="membership.html">Join Us</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <h1 style="font-size:2.2rem;">Upcoming <span>Events</span></h1>
+    <p>Workshops, socials, and speaker sessions — open to all members and prospective applicants.</p>
+  </section>
+
+  <div class="section">
+    <h2 class="section-title">May — June 2026</h2>
+    <div class="divider"></div>
+
+    <div class="events-grid">
+
+      <div class="event-card">
+        <div class="event-date"><div class="month">May</div><div class="day">10</div></div>
+        <div class="event-info">
+          <h3>New Member Orientation</h3>
+          <p>Learn how MentorBridge works, meet current mentors and mentees, and ask any questions before applying. Light refreshments provided.</p>
+          <div class="event-meta">📍 Student Union Room 804 &nbsp;|&nbsp; 🕕 6:00 PM – 7:30 PM &nbsp;|&nbsp; Free entry</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date"><div class="month">May</div><div class="day">17</div></div>
+        <div class="event-info">
+          <h3>Resume & LinkedIn Workshop</h3>
+          <p>Senior mentors and alumni guests will review your resume live and help you build a LinkedIn profile that actually gets noticed by recruiters.</p>
+          <div class="event-meta">📍 Library Conference Hall &nbsp;|&nbsp; 🕕 5:00 PM – 7:00 PM &nbsp;|&nbsp; Members only</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date"><div class="month">May</div><div class="day">24</div></div>
+        <div class="event-info">
+          <h3>Morning Run & Wellness Walk</h3>
+          <p>A casual group run around campus followed by a short mindfulness session. All fitness levels welcome — we go at the pace of the slowest runner.</p>
+          <div class="event-meta">📍 Campus Main Entrance &nbsp;|&nbsp; 🕖 7:00 AM – 8:30 AM &nbsp;|&nbsp; Open to all</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date"><div class="month">Jun</div><div class="day">4</div></div>
+        <div class="event-info">
+          <h3>Summer Mentorship Kickoff</h3>
+          <p>Applications open for the Summer 2026 cohort. This info session covers what the summer program looks like and how matching works.</p>
+          <div class="event-meta">📍 Engineering Building Room 110 &nbsp;|&nbsp; 🕔 4:00 PM – 5:30 PM &nbsp;|&nbsp; Free entry</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCHEDULE TABLE -->
+  <div class="bg-gray" style="padding: 60px 0;">
+    <div class="section" style="padding-top:0; padding-bottom:0;">
+      <h2 class="section-title">Quick Schedule Overview</h2>
+      <div class="divider"></div>
+      <div style="overflow-x:auto;">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Location</th>
+              <th>Time</th>
+              <th>Access</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>May 10</td>
+              <td>New Member Orientation</td>
+              <td>Student Union, Room 804</td>
+              <td>6:00 PM – 7:30 PM</td>
+              <td><span class="badge open">Open</span></td>
+            </tr>
+            <tr>
+              <td>May 17</td>
+              <td>Resume &amp; LinkedIn Workshop</td>
+              <td>Library Conference Hall</td>
+              <td>5:00 PM – 7:00 PM</td>
+              <td><span class="badge members">Members</span></td>
+            </tr>
+            <tr>
+              <td>May 24</td>
+              <td>Morning Run &amp; Wellness Walk</td>
+              <td>Campus Main Entrance</td>
+              <td>7:00 AM – 8:30 AM</td>
+              <td><span class="badge open">Open</span></td>
+            </tr>
+            <tr>
+              <td>Jun 4</td>
+              <td>Summer Mentorship Kickoff</td>
+              <td>Engineering Building, Rm 110</td>
+              <td>4:00 PM – 5:30 PM</td>
+              <td><span class="badge open">Open</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-band">
+    <h2>Don't Miss the Next Event</h2>
+    <p>Join the club to get notified about upcoming workshops, socials, and speaker sessions.</p>
+    <a href="membership.html" class="btn btn-primary">Join MentorBridge</a>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="news.html">News</a> &nbsp;|&nbsp; <a href="membership.html">Join</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>

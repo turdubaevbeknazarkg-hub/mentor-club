@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MentorBridge — University Mentorship Club</title>
+  <link rel="stylesheet" href="styles.css">
+</head><body>
+
+ <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html">Mentors</a></li>
+    <li><a href="mentees.html">Mentees</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="membership.html">Join Us</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Grow in Every<br><span>Aspect of Life</span></h1>
+    <p>MentorBridge connects university students with peer mentors who help them grow academically, professionally, and personally — like siblings, not strangers.</p>
+    <div class="hero-buttons">
+      <a href="membership.html#mentor" class="btn btn-primary">Become a Mentor</a>
+      <a href="membership.html#mentee" class="btn btn-secondary">Find a Mentor</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat"><div class="number">30+</div><div class="label">Active Members</div></div>
+    <div class="stat"><div class="number">15+</div><div class="label">Mentor Pairs</div></div>
+    <div class="stat"><div class="number">3</div><div class="label">Life Domains</div></div>
+    <div class="stat"><div class="number">2</div><div class="label">Semesters Running</div></div>
+  </div>
+
+  <!-- WHAT WE DO -->
+  <div class="section">
+    <h2 class="section-title">What MentorBridge Does</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">We don't just help with grades. We help you build a life.</p>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">📚</div><h3>Academic Growth</h3><p>Understand difficult courses, build study habits, and prepare for exams with a mentor who's been through it.</p></div>
+      <div class="card"><div class="card-icon">💼</div><h3>Professional Dev</h3><p>Build your resume, explore careers, work on real projects, and get guidance on internships and job hunting.</p></div>
+      <div class="card"><div class="card-icon">🏃</div><h3>Health & Fitness</h3><p>Establish routines, stay active, and build sustainable healthy habits alongside someone who holds you accountable.</p></div>
+      <div class="card"><div class="card-icon">🤝</div><h3>Relationships</h3><p>Improve communication, social skills, and learn how to build meaningful connections in university and beyond.</p></div>
+      <div class="card"><div class="card-icon">🌿</div><h3>Spiritual Balance</h3><p>Find purpose, practice mindfulness, and grow in your faith or personal values with a like-minded guide.</p></div>
+      <div class="card"><div class="card-icon">🎯</div><h3>Discipline & Goals</h3><p>Set real goals, track your routine, and have someone who checks in — not as a boss, but as a sibling.</p></div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="highlight-band">
+    <h2>Ready to Find Your Sibling?</h2>
+    <p>Whether you want to mentor others or find your own guide, the application takes less than 5 minutes.</p>
+    <a href="membership.html" class="btn btn-primary">See Membership Options</a>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="news.html">News</a> &nbsp;|&nbsp; <a href="membership.html">Join</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>

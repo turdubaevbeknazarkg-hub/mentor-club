@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentees — MentorBridge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+  <a href="index.html" class="nav-logo">🌱 MentorBridge</a>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mentors.html">Mentors</a></li>
+    <li><a href="mentees.html" class="active">Mentees</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="membership.html">Join Us</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <h1 style="font-size:2.2rem;">Our <span>Mentees</span></h1>
+    <p>These students took the first step. Here's what they're working on and what they've gained.</p>
+  </section>
+
+  <div class="section">
+    <h2 class="section-title">Mentee Spotlights</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">Real students, real growth. Names shown with permission.</p>
+
+    <div class="cards-grid">
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">J</div>
+        <h3>James O.</h3>
+        <div class="role" style="color:#7b2d8b;">Freshman — Computer Science</div>
+        <p>"I was overwhelmed my first semester. My mentor helped me build a study schedule and actually stick to it. My GPA went from 2.4 to 3.5."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Academic</span>
+          <span class="tag">Discipline</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">F</div>
+        <h3>Fatima H.</h3>
+        <div class="role" style="color:#7b2d8b;">Sophomore — Education</div>
+        <p>"My mentor checks in every week. Not just about school — she asks how I'm doing mentally, spiritually. It feels like having an older sister."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Wellness</span>
+          <span class="tag">Spiritual</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">R</div>
+        <h3>Ravi S.</h3>
+        <div class="role" style="color:#7b2d8b;">Junior — Business</div>
+        <p>"I landed my first internship because my mentor helped me rewrite my resume and practiced interview questions with me for two weeks straight."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Professional</span>
+          <span class="tag">Career</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">N</div>
+        <h3>Nour A.</h3>
+        <div class="role" style="color:#7b2d8b;">Freshman — Criminal Justice</div>
+        <p>"I used to skip the gym every week. Now my mentor and I have a shared fitness goal. Accountability changed everything for me."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Fitness</span>
+          <span class="tag">Habits</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">T</div>
+        <h3>Tariq M.</h3>
+        <div class="role" style="color:#7b2d8b;">Sophomore — Engineering</div>
+        <p>"Beyond studying, my mentor helped me understand what kind of person I want to be. We talk about faith, goals, and what success actually means."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Purpose</span>
+          <span class="tag">Spiritual</span>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="avatar" style="background: linear-gradient(135deg, #7b2d8b, #e2b04a);">Y</div>
+        <h3>Yuna K.</h3>
+        <div class="role" style="color:#7b2d8b;">Junior — Business</div>
+        <p>"I was shy and struggled to make friends. My mentor helped me open up, join clubs, and now I'm applying to be a mentor myself next semester."</p>
+        <div style="margin-top:14px;">
+          <span class="tag">Social</span>
+          <span class="tag">Confidence</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="highlight-band">
+    <h2>This Could Be Your Story</h2>
+    <p>Apply as a mentee — it's free, it's confidential, and it could change your university experience completely.</p>
+    <a href="membership.html#mentee" class="btn btn-primary">Apply as Mentee</a>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorBridge Club &nbsp;|&nbsp; <a href="news.html">News</a> &nbsp;|&nbsp; <a href="membership.html">Join</a></p>
+  </footer>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navLinks");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+</body>
+</html>
